@@ -55,23 +55,30 @@ public final class CampusAppTest {
 
   @Test
   public void testCreateUser() {
-    
+
+    final var id = "1";
+    final var name = "Usuari1";
+    final var surname = "Cognom1";
+    final var email = "usuari1@gmail.com";
+    final var role = "admin";
+    final var groupName = "swqa";
+
     // Creació d'un nou usuari
     final var state = new CampusAppState(
             new UsersRepositoryState(
                       Set.of()
-                    , Set.of(new Group(1, "swqa"))),
+                    , Set.of(new Group(1, groupName))),
             Set.of()
     ).copy();
 
     final var app = setInitialState(state);
 
-    app.createUser("Usuari1", "Cognom1", "usuari1@gmail.com", "admin", "swqa");
+    app.createUser(name, surname, email, role, groupName );
 
     final var expectedFinalState = new CampusAppState(
             new UsersRepositoryState(
-                    Set.of(new User("1", "Usuari1", "Cognom1", "usuari1@gmail.com","admin", "swqa")),
-                    Set.of(new Group(1, "swqa"))
+                    Set.of(new User (id, name, surname, email, role, groupName)),
+                    Set.of(new Group(1, groupName))
             ),
             Set.of()
     );

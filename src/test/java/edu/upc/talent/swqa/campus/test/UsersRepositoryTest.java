@@ -94,6 +94,18 @@ public interface UsersRepositoryTest {
     assertEquals(new HashSet<>(usersByGroupAndRole), new HashSet<>(actual));
     assertExpectedFinalState(defaultInitialState);
   }
+
+  @Test
+  default void testCreateGroup() {
+    setInitialState(defaultInitialState);
+    final var groupName = "development";
+    final var idGroup = defaultInitialState.groups().size()+1;
+    final var expectedNewGroup = new Group (idGroup, groupName);
+    final var expected =
+            new UsersRepositoryState(defaultInitialState.users(), plus(defaultInitialState.groups(), expectedNewGroup));
+    getRepository().createGroup(groupName);
+    assertExpectedFinalState(expected);
+  }
 }
 
 
