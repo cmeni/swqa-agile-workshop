@@ -16,8 +16,7 @@ public record InMemoryUsersRepository(UsersRepositoryState state) implements Use
         final String groupName
   ) {
     final var id = state.users().size() + 1;
-    final var user = new User("" + id, name, surname, email, role, groupName);
-    state.users().add(user);
+    state.users().add(new User("" + id, name, surname, email, role, groupName));
   }
 
   @Override

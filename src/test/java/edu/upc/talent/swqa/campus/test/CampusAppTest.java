@@ -58,7 +58,8 @@ public final class CampusAppTest {
 
     // Creació d'un nou usuari
     final var state = new CampusAppState(
-            new UsersRepositoryState(Set.of()
+            new UsersRepositoryState(
+                      Set.of()
                     , Set.of(new Group(1, "swqa"))),
             Set.of()
     ).copy();
@@ -69,11 +70,12 @@ public final class CampusAppTest {
 
     final var expectedFinalState = new CampusAppState(
             new UsersRepositoryState(
-                    Set.of(new User("1", "Usuari1 ", "Cognom1", "usuari1@gmail.com","admin", "swqa")),
+                    Set.of(new User("1", "Usuari1", "Cognom1", "usuari1@gmail.com","admin", "swqa")),
                     Set.of(new Group(1, "swqa"))
             ),
             Set.of()
     );
+
     assertEquals(expectedFinalState, state);
   }
 
