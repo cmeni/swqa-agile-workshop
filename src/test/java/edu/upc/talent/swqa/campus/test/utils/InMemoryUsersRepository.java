@@ -16,6 +16,11 @@ public record InMemoryUsersRepository(UsersRepositoryState state) implements Use
         final String groupName
   ) {
     final var id = state.users().size() + 1;
+    // check that group exists before add users
+    if(state.groups().stream().filter(g -> g.name().equals(groupName)).count()<1){
+      throw new RuntimeException("Group " + groupName + " does not exist");
+    }
+
     state.users().add(new User("" + id, name, surname, email, role, groupName));
   }
 

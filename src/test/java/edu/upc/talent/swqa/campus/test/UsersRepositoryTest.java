@@ -72,7 +72,6 @@ public interface UsersRepositoryTest {
   }
 
   @Test
-  @Disabled
   default void testCreateUserFailsIfGroupDoesNotExist() {
     setInitialState(defaultInitialState);
     final var groupName = "non-existent";
