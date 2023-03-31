@@ -55,7 +55,7 @@ public final class CampusAppTest {
 
   @Test
   public void testCreateUser() {
-
+    
     // Creació d'un nou usuari
     final var state = new CampusAppState(
             new UsersRepositoryState(

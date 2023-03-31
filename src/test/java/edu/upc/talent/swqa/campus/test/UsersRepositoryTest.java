@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Comparator;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public interface UsersRepositoryTest {
@@ -79,6 +80,18 @@ public interface UsersRepositoryTest {
           getRepository().createUser("a", "b", "a.b@example.com", "student", groupName)
     );
     assertEquals("Group " + groupName + " does not exist", exception.getMessage());
+    assertExpectedFinalState(defaultInitialState);
+  }
+
+  @Test
+  default void testGetUsersByGroupAndRole() {
+    setInitialState(defaultInitialState);
+    final var actual = getRepository().getUsersByGroupAndRole("swqa","admin");
+
+    List<User> usersByGroupAndRole = defaultInitialState.users().stream().filter(
+            user -> user.role().equals("admin") && user.groupName().equals("swqa")).toList();
+
+    assertEquals(new HashSet<>(usersByGroupAndRole), new HashSet<>(actual));
     assertExpectedFinalState(defaultInitialState);
   }
 }

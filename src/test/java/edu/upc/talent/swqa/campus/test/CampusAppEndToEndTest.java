@@ -33,8 +33,7 @@ public final class CampusAppEndToEndTest extends DatabaseBackedTest {
   public void testCreateUsers(){
 
     app.createUser("Usuari1", "Cognom1", "usuari1@gmail.com", "admin", "swqa");
-
-    assertTrue(repo.getUsersByGroup("swqa")
+    assertTrue(repo.getUsersByGroupAndRole("swqa","admin")
                 .contains(new User("N/A","Usuari1", "Cognom1", "usuari1@gmail.com", "admin", "swqa")));
   }
 
